@@ -49,6 +49,7 @@ function Cabinet() {
             position={user?.position}
             name={item.worker?.name}
             worker={user?._id}
+            desc={item?.desc}
             isCabinetVersion={true}
             createdAt={`${new Date(
               item.createdAt

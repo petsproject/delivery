@@ -22,6 +22,8 @@ function OrderCard({
   isPaid,
   isCabinetVersion = false,
   name,
+  price,
+  desc,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -108,6 +110,12 @@ function OrderCard({
         </Typography>
         <Typography variant="h5" component="div">
           Создан: {createdAt}
+        </Typography>
+        <Typography variant="h5" component="div">
+          Сумма: {price}
+        </Typography>
+        <Typography variant="h5" component="div">
+          Описание: {desc}
         </Typography>
         <Typography variant="h5" component="div">
           Оплата: {isPaid ? 'Оплачено' : 'Не оплачено'}

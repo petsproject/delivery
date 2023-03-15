@@ -44,6 +44,7 @@ function Home() {
             position={user?.position}
             isPaid={item?.isPaid}
             price={item?.price}
+            desc={item?.desc}
             name={item.worker?.name}
             worker={user?._id}
             createdAt={`${new Date(
