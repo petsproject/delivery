@@ -32,24 +32,28 @@ function Home() {
 
   return (
     <Box>
-      {deliveries.items.map((item, index) => (
-        <OrderCard
-          id={item._id}
-          key={index}
-          number={index + 1}
-          status={item.status}
-          address={item.address}
-          phone={item.phone}
-          position={user?.position}
-          worker={user?._id}
-          
-          createdAt={`${new Date(
-            item.createdAt
-          ).toLocaleDateString()} ${new Date(
-            item.createdAt
-          ).toLocaleTimeString()}`}
-        />
-      ))}
+      {deliveries.items.map((item, index) => {
+        return (
+          <OrderCard
+            id={item._id}
+            key={index}
+            number={index + 1}
+            status={item.status}
+            address={item.address}
+            phone={item.phone}
+            position={user?.position}
+            isPaid={item?.isPaid}
+            price={item?.price}
+            name={item.worker?.name}
+            worker={user?._id}
+            createdAt={`${new Date(
+              item.createdAt
+            ).toLocaleDateString()} ${new Date(
+              item.createdAt
+            ).toLocaleTimeString()}`}
+          />
+        );
+      })}
     </Box>
   );
 }

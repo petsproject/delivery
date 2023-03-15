@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
@@ -12,6 +12,9 @@ function AddDelivery({ isEditing = false }) {
   const user = useSelector((state) => state.user.data?.userData);
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
+  const [price, setPrice] = useState('');
+  const [desc, setDesc] = useState('');
+  const [isPaid, setIsPaid] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -32,6 +35,8 @@ function AddDelivery({ isEditing = false }) {
         .then(({ data }) => {
           setAddress(data.address);
           setPhone(data.phone);
+          setPrice(data.price);
+          setDesc(data.desc);
         })
         .catch((err) => {
           console.warn(err);
@@ -48,6 +53,15 @@ function AddDelivery({ isEditing = false }) {
       case 'address':
         setAddress(e.target.value);
         break;
+      case 'price':
+        setPrice(e.target.value);
+        break;
+      case 'desc':
+        setDesc(e.target.value);
+        break;
+      case 'isPaid':
+        setIsPaid(e.target.value);
+        break;
       default:
         break;
     }
@@ -58,6 +72,9 @@ function AddDelivery({ isEditing = false }) {
       const fields = {
         address,
         phone,
+        price,
+        desc,
+        isPaid,
       };
 
       const { data } = isEditing
@@ -117,7 +134,43 @@ function AddDelivery({ isEditing = false }) {
             onChange={(e) => handleChange(e, 'phone')}
             value={phone}
           />
-
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="price"
+            label="Сумма заказа"
+            type="text"
+            id="price"
+            onChange={(e) => handleChange(e, 'price')}
+            value={price}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="desc"
+            label="Описание заказа"
+            type="text"
+            id="desc"
+            onChange={(e) => handleChange(e, 'desc')}
+            value={desc}
+          />
+          <FormControl fullWidth required>
+            <InputLabel id="demo-simple-select-label">
+              Заказ оплачен?
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={isPaid}
+              label="Заказ оплачен?"
+              onChange={(e) => handleChange(e, 'isPaid')}
+            >
+              <MenuItem value={true}>Заказ оплачен</MenuItem>
+              <MenuItem value={false}>Заказ не оплачен</MenuItem>
+            </Select>
+          </FormControl>
           <Button
             type="submit"
             fullWidth

@@ -16,6 +16,8 @@ function Cabinet() {
     dispatch(fetchDeliveries());
   }, []);
 
+  console.log(deliveries);
+
   if (user.data) {
     if (user.data?.position !== 'courier') {
       return <Navigate to="/" />;
@@ -33,7 +35,7 @@ function Cabinet() {
   return (
     <Box>
       {deliveries
-        .filter((item) => item.worker === user.data?._id)
+        .filter((item) => item.worker?._id === user.data?._id)
         .map((item, index) => (
           <OrderCard
             id={item._id}
@@ -42,7 +44,10 @@ function Cabinet() {
             status={item.status}
             address={item.address}
             phone={item.phone}
+            isPaid={item?.isPaid}
+            price={item?.price}
             position={user?.position}
+            name={item.worker?.name}
             worker={user?._id}
             isCabinetVersion={true}
             createdAt={`${new Date(

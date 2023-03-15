@@ -19,7 +19,9 @@ function OrderCard({
   status,
   position,
   worker,
+  isPaid,
   isCabinetVersion = false,
+  name,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ function OrderCard({
     try {
       const fields = {
         status: 'done',
+        isPaid: true,
       };
 
       const { data } = await axios.patch(`/deliveries/${id}`, fields);
@@ -106,6 +109,14 @@ function OrderCard({
         <Typography variant="h5" component="div">
           Создан: {createdAt}
         </Typography>
+        <Typography variant="h5" component="div">
+          Оплата: {isPaid ? 'Оплачено' : 'Не оплачено'}
+        </Typography>
+        {name ? (
+          <Typography variant="h5" component="div">
+            Имя курьера: {name}
+          </Typography>
+        ) : null}
         {status === 'new' ? (
           <Typography variant="h5" component="div" color="#1976d2">
             Статус: новый
