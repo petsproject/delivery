@@ -112,7 +112,7 @@ function OrderCard({
           Создан: {createdAt}
         </Typography>
         <Typography variant="h5" component="div">
-          Сумма: {price}
+          Сумма: {price} ₽
         </Typography>
         <Typography variant="h5" component="div">
           Описание: {desc}
